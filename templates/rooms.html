@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Hostel Rooms</title>
+</head>
+
+<body>
+
+<h2>Hostel Rooms</h2>
+
+<table border="1">
+
+<tr>
+<th>Room Number</th>
+<th>Status</th>
+</tr>
+
+{% for room in rooms %}
+
+<tr>
+<td>{{ room.number }}</td>
+<td>{{ room.status }}</td>
+</tr>
+
+{% endfor %}
+
+</table>
+
+<br>
+
+<a href="/">Back</a>
+
+</body>
+</html>
