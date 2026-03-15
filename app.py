@@ -1,14 +1,7 @@
 from flask import Flask, render_template
+import sqlite3
 
 app = Flask(__name__)
-
-# Sample room data
-rooms = [
-    {"number": 101, "status": "Available"},
-    {"number": 102, "status": "Occupied"},
-    {"number": 103, "status": "Available"},
-    {"number": 104, "status": "Available"}
-]
 
 @app.route("/")
 def home():
@@ -16,6 +9,15 @@ def home():
 
 @app.route("/rooms")
 def show_rooms():
+
+    conn = sqlite3.connect("hostel.db")
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM rooms")
+    rooms = cursor.fetchall()
+
+    conn.close()
+
     return render_template("rooms.html", rooms=rooms)
 
 if __name__ == "__main__":
