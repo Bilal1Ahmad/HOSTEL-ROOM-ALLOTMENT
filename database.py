@@ -7,16 +7,25 @@ cursor.execute("""
 CREATE TABLE IF NOT EXISTS rooms(
 id INTEGER PRIMARY KEY AUTOINCREMENT,
 room_number INTEGER,
+floor INTEGER,
+capacity INTEGER,
 status TEXT
 )
 """)
 
-cursor.execute("INSERT INTO rooms (room_number,status) VALUES (101,'Available')")
-cursor.execute("INSERT INTO rooms (room_number,status) VALUES (102,'Occupied')")
-cursor.execute("INSERT INTO rooms (room_number,status) VALUES (103,'Available')")
-cursor.execute("INSERT INTO rooms (room_number,status) VALUES (104,'Available')")
+rooms = [
+(101,1,2,"Available"),
+(102,1,2,"Occupied"),
+(201,2,3,"Available"),
+(202,2,2,"Available")
+]
+
+cursor.executemany(
+"INSERT INTO rooms (room_number,floor,capacity,status) VALUES (?,?,?,?)",
+rooms
+)
 
 conn.commit()
 conn.close()
 
-print("Database created successfully")
+print("Database updated successfully")
