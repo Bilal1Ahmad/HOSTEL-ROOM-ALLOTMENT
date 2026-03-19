@@ -1,32 +1,112 @@
-<table class="table table-bordered">
+<!DOCTYPE html>
+<html lang="en">
 
-<tr>
-<th>Room</th>
-<th>Floor</th>
-<th>Capacity</th>
-<th>Status</th>
-</tr>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Hostel Rooms</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+body {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    min-height: 100vh;
+    color: white;
+}
+
+/* Card Styling */
+.card {
+    border-radius: 15px;
+    transition: 0.3s;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+}
+
+.card:hover {
+    transform: translateY(-10px) scale(1.03);
+}
+
+/* Button */
+.btn-custom {
+    border-radius: 20px;
+    transition: 0.3s;
+}
+
+.btn-custom:hover {
+    transform: scale(1.1);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container py-5">
+
+<h2 class="text-center mb-5">🏠 Choose Your Room</h2>
+
+<div class="row justify-content-center">
 
 {% for room in rooms %}
 
-<tr>
+<div class="col-md-3 mb-4">
 
-<td>{{ room[1] }}</td>
-<td>{{ room[2] }}</td>
-<td>{{ room[3] }}</td>
+<div class="card text-center shadow">
 
-<td>
+<div class="card-body">
+
+<h5 class="mb-3">Room {{ room[1] }}</h5>
+
+<p>Floor: {{ room[2] }}</p>
+<p>Capacity: {{ room[3] }}</p>
 
 {% if room[4] == "Available" %}
-<span class="badge bg-success">Available</span>
+
+<span class="badge bg-success mb-3">Available</span>
+
+<button onclick="confirmSelect({{ room[0] }})"
+class="btn btn-success btn-custom w-100">
+Select Room
+</button>
+
 {% else %}
-<span class="badge bg-danger">Occupied</span>
+
+<span class="badge bg-danger mb-3">Occupied</span>
+
+<button class="btn btn-secondary w-100" disabled>
+Unavailable
+</button>
+
 {% endif %}
 
-</td>
+</div>
 
-</tr>
+</div>
+
+</div>
 
 {% endfor %}
 
-</table>
+</div>
+
+<div class="text-center mt-4">
+<a href="/" class="btn btn-light">Back</a>
+</div>
+
+</div>
+
+<script>
+function confirmSelect(roomId) {
+    if (confirm("Are you sure you want to select this room?")) {
+        window.location.href = "/select/" + roomId;
+    }
+}
+</script>
+
+</body>
+
+</html>

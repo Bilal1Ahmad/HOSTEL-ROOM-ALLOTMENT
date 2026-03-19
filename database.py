@@ -9,7 +9,8 @@ id INTEGER PRIMARY KEY AUTOINCREMENT,
 room_number INTEGER,
 floor INTEGER,
 capacity INTEGER,
-status TEXT
+status TEXT,
+student TEXT
 )
 """)
 
